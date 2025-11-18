@@ -44,7 +44,7 @@ def animate_cube(duration=50, fps=15):
 
         projected_v = [project(v, offset=offset) for v in rotated]
         for s, e in edges:
-            draw_line(canvas, *projected_v[s][:-1], *projected_v[e][:-1])
+            draw_line(canvas, *projected_v[s][:-1], *projected_v[e][:-1], "+")
 
         render_canvas(canvas)
         frame += 1
