@@ -6,7 +6,7 @@ This file for main actions
 import time
 
 from functions import clear_screen, create_canvas, rotate_z, project, render_canvas, rotate_y, rotate_x, \
-    get_console_size, draw_line
+    get_console_size, draw_line, download_text, download_text
 from validation import check_email
 
 # CUBE
@@ -21,6 +21,7 @@ edges = (
     (4, 5), (5, 6), (6, 7), (7, 4),
     (0, 4), (1, 5), (2, 6), (3, 7)
 )
+
 
 # PYRAMID
 
@@ -71,30 +72,38 @@ def animate_cube(duration=50, fps=15):
 
 
 def main():
-    email = input("Please enter your email: ")
-    if not check_email(email):
-        print("Invalid email, you will not see my beautiful 3D animation in console.")
+    menu = input("What do you want to do?\n\n"
+                 "1.Email validation     2. Number of unique numbers     3. Save your text in file.\n4. Animation in console\n\n")
+    if menu == "1":
+        email = input("Please enter your email: ")
+        if not check_email(email):
+            print("Invalid email.")
+        else:
+            print("This is correct email!")
+        return
+    elif menu == "2":
+        input_nums = input("Please enter several numbers, and I will tell you how many of them are unique:\n\n").split()
+
+        if len(input_nums) <= 1:
+            print("Invalid input!")
+        else:
+            print(len(set(input_nums)))
+        return
+    elif menu == "3":
+        text = input("Enter text to save in file: \n\n")
+        download_text(text)
+        print("Text saved in file!")
         return
 
-    input_nums = input("Before showing you my beautiful animation, please enter \n"
-                       "several numbers, and I will tell you how many of them are unique:").split()
-    
-    if len(input_nums) <= 1:
-        print("Invalid input!")
-        return
-        
-    print(len(set(input_nums)))
-    time.sleep(3)
-    
-    for i in range(1, 4):
-        clear_screen()
-        window_size = get_console_size()
-        canvas = create_canvas(*window_size)
-        canvas[len(canvas)//2][len(canvas[0])//2] = str(i)
-        render_canvas(canvas)
-        time.sleep(1)
-    
-    animate_cube()
+    elif menu == "4":
+        for i in range(1, 4):
+            clear_screen()
+            window_size = get_console_size()
+            canvas = create_canvas(*window_size)
+            canvas[len(canvas) // 2][len(canvas[0]) // 2] = str(i)
+            render_canvas(canvas)
+            time.sleep(1)
+        animate_cube()
 
 
 if __name__ == "__main__":
