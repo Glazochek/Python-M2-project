@@ -4,6 +4,7 @@ This file for main actions
 
 """
 import time
+import requests
 
 from functions import clear_screen, create_canvas, rotate_z, project, render_canvas, rotate_y, rotate_x, \
     get_console_size, draw_line, download_text, download_text
@@ -73,7 +74,7 @@ def animate_cube(duration=50, fps=15):
 
 def main():
     menu = input("What do you want to do?\n\n"
-                 "1.Email validation     2. Number of unique numbers     3. Save your text in file.\n4. Animation in console\n\n")
+                 "1.Email validation     2. Number of unique numbers     3. Save your text in file.\n4. Get weather info of random coords.     5. Animation in console\n\n")
     if menu == "1":
         email = input("Please enter your email: ")
         if not check_email(email):
@@ -96,6 +97,11 @@ def main():
         return
 
     elif menu == "4":
+        data = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&past_days=10&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m")
+        print(data.text)
+        return
+
+    elif menu == "5":
         for i in range(1, 4):
             clear_screen()
             window_size = get_console_size()
