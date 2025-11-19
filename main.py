@@ -7,8 +7,8 @@ import time
 import requests
 
 from functions import clear_screen, create_canvas, rotate_z, project, render_canvas, rotate_y, rotate_x, \
-    get_console_size, draw_line, download_text, download_text
-from validation import check_email
+    get_console_size, draw_line, download_text, download_text, check_email
+from colorama import Fore, Style
 
 # CUBE
 
@@ -33,9 +33,8 @@ edges = (
 #     [-1,  1, -1],
 #     [ 0,  0,  1]
 # ]
-# vertices = [rotate_x(v, 90) for v in vertices]
-# vertices = [rotate_y(v, 0) for v in vertices]
-# 
+#
+#
 # edges = (
 #     (0, 1), (1, 2), (2, 3), (3, 0),
 #     (0, 4), (1, 4), (2, 4), (3, 4)
@@ -73,43 +72,56 @@ def animate_cube(duration=50, fps=15):
 
 
 def main():
-    menu = input("What do you want to do?\n\n"
-                 "1.Email validation     2. Number of unique numbers     3. Save your text in file.\n4. Get weather info of random coords.     5. Animation in console\n\n")
-    if menu == "1":
-        email = input("Please enter your email: ")
-        if not check_email(email):
-            print("Invalid email.")
-        else:
-            print("This is correct email!")
-        return
-    elif menu == "2":
-        input_nums = input("Please enter several numbers, and I will tell you how many of them are unique:\n\n").split()
+    while True:
+        menu = input(
+            f"\n\n{Fore.CYAN}What do you want to do?{Style.RESET_ALL}\n\n"
+            f"{Fore.YELLOW}1.{Style.RESET_ALL} Email validation     "
+            f"{Fore.YELLOW}2.{Style.RESET_ALL} Unique numbers     "
+            f"{Fore.YELLOW}3.{Style.RESET_ALL} Save text\n"
+            f"{Fore.YELLOW}4.{Style.RESET_ALL} Weather Barcelona     "
+            f"{Fore.YELLOW}5.{Style.RESET_ALL} Animation\n\n"
+        )
 
-        if len(input_nums) <= 1:
-            print("Invalid input!")
-        else:
-            print(len(set(input_nums)))
-        return
-    elif menu == "3":
-        text = input("Enter text to save in file: \n\n")
-        download_text(text)
-        print("Text saved in file!")
-        return
+        if menu == "1":
+            email = input(Fore.CYAN + "Enter your email: " + Style.RESET_ALL)
+            print(Fore.RED + "Invalid email." + Style.RESET_ALL if not check_email(email)
+                  else Fore.GREEN + "Correct email!" + Style.RESET_ALL)
 
-    elif menu == "4":
-        data = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&past_days=10&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m")
-        print(data.text)
-        return
+        elif menu == "2":
+            nums = input(Fore.CYAN + "Enter numbers: " + Style.RESET_ALL).split()
+            print(Fore.RED + "Invalid input!" + Style.RESET_ALL if len(nums) <= 1
+                  else Fore.GREEN + str(len(set(nums))) + Style.RESET_ALL)
 
-    elif menu == "5":
-        for i in range(1, 4):
-            clear_screen()
-            window_size = get_console_size()
-            canvas = create_canvas(*window_size)
-            canvas[len(canvas) // 2][len(canvas[0]) // 2] = str(i)
-            render_canvas(canvas)
-            time.sleep(1)
-        animate_cube()
+        elif menu == "3":
+            text = input(Fore.CYAN + "Enter text: " + Style.RESET_ALL)
+            download_text(text)
+            print(Fore.GREEN + "Saved!" + Style.RESET_ALL)
+
+        elif menu == "4":
+            r = requests.get(
+                "https://api.open-meteo.com/v1/forecast?"
+                "latitude=41.39&longitude=2.17&past_days=1&"
+                "hourly=temperature_2m,relative_humidity_2m,wind_speed_10m"
+            )
+            d = r.json()
+            info = {
+                "temp": d["hourly"]["temperature_2m"][0],
+                "humidity": d["hourly"]["relative_humidity_2m"][0],
+                "wind": d["hourly"]["wind_speed_10m"][0]
+            }
+            print(Fore.MAGENTA + f"\nTemperature: {info['temp']}°C" + Style.RESET_ALL)
+            print(Fore.BLUE + f"Humidity: {info['humidity']}%" + Style.RESET_ALL)
+            print(Fore.YELLOW + f"Wind: {info['wind']} m/s\n" + Style.RESET_ALL)
+
+        elif menu == "5":
+            for i in range(1, 4):
+                clear_screen()
+                window_size = get_console_size()
+                c = create_canvas(*window_size)
+                c[len(c)//2][len(c[0])//2] = str(i)
+                render_canvas(c)
+                time.sleep(1)
+            animate_cube()
 
 
 if __name__ == "__main__":

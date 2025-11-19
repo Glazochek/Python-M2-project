@@ -7,9 +7,13 @@ import math
 import os
 import shutil
 import numpy as np
+import re
 
 
 def get_rotation_matrix(dimension, angle):
+    """
+    Returns a 3D rotation matrix for rotating around x, y, or z axis.
+    """
     cos_a, sin_a = math.cos(angle), math.sin(angle)
     if dimension == "x":
         return np.array([
@@ -32,37 +36,61 @@ def get_rotation_matrix(dimension, angle):
 
 
 def get_console_size():
+    """
+    Gets the console (terminal) size.
+    """
     return shutil.get_terminal_size(fallback=(80, 24))
 
 
 def clear_screen():
+    """
+    Clears the screen on any OS.
+    """
     try:
         os.system('cls' if os.name == 'nt' else 'clear')
     except:
-        print("\n"*24)
+        print("\n" * 24)
 
 
 def create_canvas(width, height):
+    """
+    Creates a blank canvas made of spaces.
+    """
     return [[' ' for _ in range(width)] for _ in range(height)]
 
 
 def render_canvas(canvas):
+    """
+    Printing canvas
+    """
     print(*[''.join(row) for row in canvas], sep="\n")
 
 
 def rotate_x(point, angle):
+    """
+    Rotates a 3D point around the x-axis.
+    """
     return (get_rotation_matrix('x', angle) @ np.array(point)).tolist()
 
 
 def rotate_y(point, angle):
+    """
+    Rotates a 3D point around the y-axis.
+    """
     return (get_rotation_matrix('y', angle) @ np.array(point)).tolist()
 
 
 def rotate_z(point, angle):
+    """
+    Rotates a 3D point around the z-axis.
+    """
     return (get_rotation_matrix('z', angle) @ np.array(point)).tolist()
 
 
 def project(point, scale=3, offset=(10, 6)):
+    """
+    Projects a 3D point onto 2D screen coords.
+    """
     x, y, z = point
     perspective = 1 / (1 + z * 0.3)
     screen_x = int(offset[0] + x * scale * perspective)
@@ -71,6 +99,9 @@ def project(point, scale=3, offset=(10, 6)):
 
 
 def draw_line(canvas, x0, y0, x1, y1):
+    """
+    Draws a line on the canvas.
+    """
     dx = abs(x1 - x0);
     dy = abs(y1 - y0)
     sx = 1 if x0 < x1 else -1;
@@ -100,7 +131,16 @@ def draw_line(canvas, x0, y0, x1, y1):
 
 
 def download_text(text):
+    """
+    Saves given text into a local file.
+    """
     f = open("text.txt", "w")
     f.write(text)
     f.close()
 
+
+def check_email(email):
+    """
+    Checks if an email fits a basic valid pattern.
+    """
+    return re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", email)
