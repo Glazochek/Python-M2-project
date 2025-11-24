@@ -22,10 +22,7 @@ python main.py
 
 ## Usage
 
-<video width="640" height="480" controls>
-  <source src="data/video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[![Console Animation Demo](https://img.youtube.com/vi/WYtBcytZUAM/0.jpg)](https://youtu.be/WYtBcytZUAM)
 
 ---
 
