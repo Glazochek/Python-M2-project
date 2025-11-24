@@ -1,32 +1,81 @@
 # Animation In Console
-## Authors: Only me
-### Description: an animation in console of rotation of 3d objects
-Purpose of the program: display animation in console
-Todolist:
-  - email authorization in console (usage of regex)
-  - projection 3d coords to 2d
-  - rotation by axios
-  - drawing lines
-  - adding menu
-  - add all additional things to meet requirements
 
+## Description
+- This project creates a **dynamic 3D rotation animation** rendered directly in the Python console using ASCII characters.  
+- It also contains a set of additional mini-tools: email validator, unique number counter, file saver, and weather API request.  
+- The project is designed for **students who need a complete Python application** demonstrating file handling, APIs, animations, math, data structures, and menu navigation.
 
-Available functions:
-1. Email validation     
-2. Number of unique numbers
-3. Save your text in file.
-4. Get weather info of random coords.
-5. Animation in console
+## Screenshots
 
-I want to get points for EVERYTHING:
+![Main Screen](data/img.png)
 
-- Users can interact through a menu
-- Program uses an external file to store data
-- Program uses an API
-- All data structures used properly: dict, list, set, tuple
-- Exceptions are handled
-- Functions have documentation (docstrings)
-- No code outside functions
-- <10 functions and <300 lines per file
-- Project has README.md
-- Project has requirements.txt
+## Installation
+
+```bash
+git clone https://github.com/Glazochek/Python-M2-project.git
+cd Python-M2-project
+
+pip install -r requirements.txt
+
+python main.py
+```
+
+## Usage
+
+<video width="640" height="480" controls>
+  <source src="data/video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+---
+
+# Completed functionality and approximate grades from your perception
+
+List of all points you want to be graded for:
+
+### Implemented features
+1. **Email validation** — (regex, input validation)  
+2. **Number of unique numbers** — (data handling)  
+3. **Save text to a file** — (external file usage)  
+4. **Get weather info of random coordinates** — (API usage)  
+5. **Animation in console** — (3D → 2D projection, rotation, line drawing)  
+
+### Code & design
+- **Menu system** — (user interaction)  
+- Proper use of **dict, list, set, tuple** 
+- **Exception handling** 
+- **Functions documented with docstrings**  
+- No code outside functions 
+- <10 functions per file 
+- <300 lines per file  
+- Project has **README.md** 
+- Project has **requirements.txt** 
+
+---
+
+## TODO
+
+### Incomplete Planned Features
+- [ ] Add more 3D shapes 
+- [ ] Improve ASCII rendering performance  
+- [ ] Add color support in terminals that allow it  
+- [ ] Add unit tests for math utilities and menu functions  
+- [ ] Improve menu design and user experience  
+
+---
+
+## Project Structure
+
+```bash
+my_project/
+├── .git/                
+├── .gitignore             
+├── README.md              
+├── requirements.txt   
+├── data/
+│   ├── video.mp4
+│   ├── img.png
+│   └── text.txt     
+├── main.py               
+└── functions.py
+```

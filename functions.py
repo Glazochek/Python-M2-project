@@ -134,7 +134,7 @@ def download_text(text):
     """
     Saves given text into a local file.
     """
-    f = open("text.txt", "w")
+    f = open("data/text.txt", "w")
     f.write(text)
     f.close()
 

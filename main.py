@@ -41,7 +41,7 @@ edges = (
 # )
 
 
-def animate_cube(duration=50, fps=15):
+def animate_cube(duration=150, fps=15):
     frame = 0
     start = time.time()
     while (time.time() - start) < duration:
@@ -126,3 +126,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
