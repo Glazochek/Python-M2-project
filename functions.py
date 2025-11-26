@@ -47,7 +47,7 @@ def clear_screen():
     Clears the screen on any OS.
     """
     try:
-        os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('clear')
     except:
         print("\n" * 24)
 
@@ -98,7 +98,7 @@ def project(point, scale=3, offset=(10, 6)):
     return screen_x, screen_y
 
 
-def draw_line(canvas, x0, y0, x1, y1):
+def draw_line(canvas, x0, y0, x1, y1, char="*"):
     """
     Draws a line on the canvas.
     """
@@ -110,6 +110,7 @@ def draw_line(canvas, x0, y0, x1, y1):
 
     while True:
         if 0 <= x0 < len(canvas[0]) and 0 <= y0 < len(canvas):
+            canvas[y0][x0] = char
             if canvas[y0][x0 - 1] == "–":
                 canvas[y0][x0] = " "
             else:

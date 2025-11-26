@@ -22,7 +22,7 @@ python main.py
 
 ## Usage
 
-[![Console Animation Demo](https://img.youtube.com/vi/WYtBcytZUAM/0.jpg)](https://youtu.be/WYtBcytZUAM)
+[Console Animation Demo watch on YouTube](https://youtu.be/WYtBcytZUAM)
 
 ---
 
