@@ -1,4 +1,4 @@
-# Animation In Console
+# Animation In Console (or PYTHON FEATURES EXPLORER)
 
 ## Description
 - This project creates a **dynamic 3D rotation animation** rendered directly in the Python console using ASCII characters.  

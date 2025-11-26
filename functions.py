@@ -9,6 +9,12 @@ import shutil
 import numpy as np
 import re
 
+"""
+Gets the console size.
+"""
+
+get_console_size = lambda: shutil.get_terminal_size(fallback=(80, 24))
+
 
 def get_rotation_matrix(dimension, angle):
     """
@@ -35,16 +41,9 @@ def get_rotation_matrix(dimension, angle):
         ])
 
 
-def get_console_size():
-    """
-    Gets the console (terminal) size.
-    """
-    return shutil.get_terminal_size(fallback=(80, 24))
-
-
 def clear_screen():
     """
-    Clears the screen on any OS.
+    Clears the screen.
     """
     try:
         os.system('clear')
@@ -98,19 +97,18 @@ def project(point, scale=3, offset=(10, 6)):
     return screen_x, screen_y
 
 
-def draw_line(canvas, x0, y0, x1, y1, char="*"):
+def draw_line(canvas, x0, y0, x1, y1):
     """
     Draws a line on the canvas.
     """
-    dx = abs(x1 - x0);
+    dx = abs(x1 - x0)
     dy = abs(y1 - y0)
-    sx = 1 if x0 < x1 else -1;
+    sx = 1 if x0 < x1 else -1
     sy = 1 if y0 < y1 else -1
     err = dx - dy
 
     while True:
         if 0 <= x0 < len(canvas[0]) and 0 <= y0 < len(canvas):
-            canvas[y0][x0] = char
             if canvas[y0][x0 - 1] == "–":
                 canvas[y0][x0] = " "
             else:

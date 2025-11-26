@@ -8,7 +8,7 @@ import time
 import requests
 
 from functions import clear_screen, create_canvas, rotate_z, project, render_canvas, rotate_y, rotate_x, \
-    get_console_size, draw_line, download_text, download_text, check_email
+    get_console_size, draw_line, download_text, check_email
 from colorama import Fore, Style
 import logging
 
@@ -86,6 +86,7 @@ def animate_cube(duration=150, fps=15):
 
 def main():
     logger.info(f"start")
+    print("")
     start_text = (
         f"\n\n{Fore.CYAN}What do you want to do? (write NUMBER of choice) {Style.RESET_ALL}\n\n"
         f"{Fore.YELLOW}1.{Style.RESET_ALL} Email validation     "
@@ -138,11 +139,16 @@ def main():
             elif menu == "5":
                 logger.info(f"press 5")
 
-                for i in range(1, 4):
+                for i in range(1, 4)[::-1]:
                     clear_screen()
                     window_size = get_console_size()
                     c = create_canvas(*window_size)
-                    c[len(c) // 2][len(c[0]) // 2] = str(i)
+                    str_clr =  Fore.GREEN + str(i) + Style.RESET_ALL
+                    if i == 2:
+                        str_clr = Fore.YELLOW + str(i) + Style.RESET_ALL
+                    elif i == 1:
+                        str_clr = Fore.RED + str(i) + Style.RESET_ALL
+                    c[len(c) // 2][len(c[0]) // 2] = str_clr
                     render_canvas(c)
                     time.sleep(1)
                 animate_cube()
